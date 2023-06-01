@@ -147,7 +147,7 @@ const AuthenticationDataProvider = ({ children }) => {
                     setTimeout(() => {
                         cleanLoginValue();
                         setErrMsgLogin('');
-                    }, 2000)
+                    }, 1000)
                 }
             } catch (error) {
                 setErrMsgLogin("No such user exists");
@@ -155,7 +155,7 @@ const AuthenticationDataProvider = ({ children }) => {
                     navigate('/registration');
                     cleanLoginValue();
                     setErrMsgLogin('');
-                }, 2000)
+                }, 1000)
             };
 
             function cleanLoginValue() {
