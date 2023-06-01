@@ -5,6 +5,7 @@ import Button from '@mui/material/Button';
 import store from "../../redux/store";
 import { ContentData } from '../data/content-data';
 import { axiosBaseUrl } from "../../api/axios";
+import { AuthenticationData } from '../data/authentication-data';
 
 // GET URL BUY MOVIE
 const BUY_MOVIE_URL = 'users/account/';
@@ -30,16 +31,20 @@ export const ListSelectedMovies = () => {
     // object store data movies 
     const storeDataMovies = store.getState();
     const { onHandlerCardsInfoMovies } = useContext(ContentData);
+    const { responseLogin } = useContext(AuthenticationData);
+    console.log(responseLogin)
 
     const onHandlerDeleteMovie = (value) => {
         storeDataMovies.movie.splice(value, 1);
     };
 
     const onHandlerBuyMovie = async (value) => {
-        console.log(value.toString());
         try {
             const response = await axiosBaseUrl({
                 method: "POST", url: BUY_MOVIE_URL,
+                auth: {
+                    username: responseLogin.username,
+                },
                 data: {
                     id: value.toString(),
                 },
