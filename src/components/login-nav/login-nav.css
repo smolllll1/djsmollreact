@@ -1,0 +1,23 @@
+/* component <AccountMenu/> Link: Username, Settings, Logout*/
+.link-avatar,
+.view-profile {
+    text-decoration: none;
+    color: rgba(128, 128, 128, .8);
+}
+
+.link-avatar:hover {
+    color: seashell;
+}
+
+/* Add movies */
+.add-movies {
+    background-color: inherit;
+    color: white;
+    align-content: center;
+}
+
+/* NotificationsIcon */
+.bell {
+    color: white;
+    align-content: center;
+}

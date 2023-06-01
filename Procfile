@@ -1,0 +1,1 @@
+web: gunicorn backend_django_rest.wsgi --log-file -

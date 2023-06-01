@@ -1,0 +1,9 @@
+/* MORE BUTTONS MENU */
+
+.more-menu-link {
+    color: rgba(128, 128, 128, .8);
+}
+
+.more-menu-link:hover {
+    color: seashell;
+}

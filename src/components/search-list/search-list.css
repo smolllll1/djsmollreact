@@ -1,0 +1,22 @@
+/* PAGE SEARCH */
+
+.search-item {
+    display: inline-flex;
+}
+
+.search-item>a {
+    width: 100%;
+    text-decoration: none;
+    color: gray;
+}
+
+.search-item>a:hover {
+    color: #01b4e4;
+}
+
+.count-span {
+    font-size: 0.8em;
+    background-color: rgba(0, 0, 0, 0.08);
+    padding: 0px 10px;
+    border-radius: 8px;
+}

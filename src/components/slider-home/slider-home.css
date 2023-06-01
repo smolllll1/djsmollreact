@@ -1,0 +1,11 @@
+/* SLIDE HOME */
+.slide-top {
+    background: linear-gradient(to top, #8F3ABB 20%, #8F3ABB 20%, #0d253f 80%, #0d253f 80%);
+    height: 20px;
+}
+
+/* home page div className="home-random-bottom" */
+.home-random-bottom {
+    background: linear-gradient(to bottom, #01b4e4 20%, #01b4e4 20%, #0d253f 80%, #0d253f 80%);
+    height: 20px;
+}

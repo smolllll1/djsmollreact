@@ -1,0 +1,11 @@
+/* PAGE CONTACTS */
+
+.contacts-link>a {
+    width: 100%;
+    text-decoration: none;
+    color: gray;
+}
+
+.contacts-link>a:hover {
+    color: #01b4e4;
+}

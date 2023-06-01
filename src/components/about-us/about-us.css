@@ -1,0 +1,53 @@
+/* PAGE ABOUT US */
+
+.advantage-item>li {
+    color: #ffffff;
+    line-height: 1.5;
+    margin-bottom: 24px;
+}
+
+.advantage-item>li::first-letter{
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: red;
+}
+
+/* greeting "Hi there," */
+.top-greeting {
+    font-size: 10rem;
+    height: 200px;
+    line-height: 200px;
+}
+
+@media (max-width: 880px) {
+    .top-greeting {
+        font-size: 7rem;
+    }
+
+}
+
+@media (max-width: 680px) {
+    .top-greeting {
+        font-size: 4rem;
+    }
+
+}
+
+@media (max-width: 380px) {
+    .top-greeting {
+        font-size: 2rem;
+    }
+
+}
+
+/* top block */
+.top-about {
+    padding-top: 70px;
+    box-sizing: border-box;
+    background-image: url(../../svg/red-pipes.svg);
+    background-position: center -250px;
+    background-repeat: no-repeat;
+    position: relative;
+    top: 0;
+    left: 0;
+}
