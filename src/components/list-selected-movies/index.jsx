@@ -32,13 +32,14 @@ export const ListSelectedMovies = () => {
     const storeDataMovies = store.getState();
     const { onHandlerCardsInfoMovies } = useContext(ContentData);
     const { responseLogin } = useContext(AuthenticationData);
-    console.log(responseLogin)
+    console.log(responseLogin.username)
 
     const onHandlerDeleteMovie = (value) => {
         storeDataMovies.movie.splice(value, 1);
     };
 
     const onHandlerBuyMovie = async (value) => {
+        console.log(value.toString())
         try {
             const response = await axiosBaseUrl({
                 method: "POST", url: BUY_MOVIE_URL,
