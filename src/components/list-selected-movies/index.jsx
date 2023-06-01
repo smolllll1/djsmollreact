@@ -41,7 +41,7 @@ export const ListSelectedMovies = () => {
             const response = await axiosBaseUrl({
                 method: "POST", url: BUY_MOVIE_URL,
                 data: {
-                    id: value,
+                    id: value.toString(),
                 },
             })
             if (response.status === 200) {
