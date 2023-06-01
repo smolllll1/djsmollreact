@@ -20,11 +20,11 @@ const PeopleListInfo = () => {
         isError,
         error,
         data: listInfoPeople,
-    } = useQuery(["pop_people", isCardsPeopleId], () => getAllPeopleId(isCardsPeopleId ? isCardsPeopleId : 224513), {
+    } = useQuery(["pop_people", isCardsPeopleId], () => getAllPeopleId(isCardsPeopleId), {
         keepPreviousData: true
     });
 
-    if (isLoading) return <div className="text-center vh-100 mt-5">
+if (isLoading) return <div className="text-center vh-100 mt-5">
         <CircularStatic />
     </div>;
     if (isError) return <div className="vh-100 text-secondary text-center mt-5">
@@ -71,10 +71,10 @@ const PeopleListInfo = () => {
                             <div className="col-lg-4 p-4 d-flex justify-content-center">
                                 <div className="w-100">
                                     <Link onClick={() => { navigate(-1) }}>
-                                        <img src={`https://image.tmdb.org/t/p/original${listInfoPeople?.profile_path}`}
+                                        <img src={`https://image.tmdb.org/t/p/original${listInfoPeople.profile_path}`}
                                             className="rounded"
                                             style={{ width: "100%", height: "100%", objectFit: "cover" }}
-                                            alt={listInfoPeople?.name} />
+                                            alt={listInfoPeople.name} />
                                     </Link>
                                 </div>
                             </div>
@@ -86,13 +86,13 @@ const PeopleListInfo = () => {
                                                 <Link onClick={() => { navigate(-1) }}
                                                     className="text-decoration-none"
                                                     style={{ color: "#01b4e4" }} >
-                                                    {listInfoPeople?.name}
+                                                    {listInfoPeople.name}
                                                 </Link>
                                                 :
                                                 <Link onClick={() => { navigate(-1) }}
                                                     className="text-decoration-none"
                                                     style={{ color: "deeppink" }} >
-                                                    {listInfoPeople?.name}
+                                                    {listInfoPeople.name}
                                                 </Link>
                                             }
                                         </h2>

@@ -9,8 +9,8 @@ const ArrowButton = () => {
                 display: "grid",
                 justifyContent: "center",
                 alignContent:"center",
-                width: "58px",
-                height: "58px",
+                width: "40px",
+                height: "40px",
                 bottom: "3%",
                 right: "2%"
             }}
@@ -19,10 +19,9 @@ const ArrowButton = () => {
                 style={{
                     color: "rgb(13, 37, 63)",
                     textDecoration: "none",
-                    fontSize: "1rem"
                 }}
             >
-                <p className='m-0 fs-1'>&#8593;</p>
+                <p className='m-0 fs-3'>&#8593;</p>
             </a>
         </div>
     );

@@ -15,12 +15,12 @@ export const getMoviesPage = async (pageParam = 1) => {
 };
 // all people request
 export const getAllPeopleId = async (idParam) => {
-  const response = await axiosBaseUrl.get(`pop_people/${idParam}`);
+  const response = await axiosBaseUrl.get(`pop_people/${idParam}/`);
   return response.data;
 };
 // all movies request
 export const getAllMoviesId = async (idParam) => {
-  const response = await axiosBaseUrl.get(`pop_movies/${idParam}`);
+  const response = await axiosBaseUrl.get(`pop_movies/${idParam}/`);
   return response.data;
 };
 // search people request

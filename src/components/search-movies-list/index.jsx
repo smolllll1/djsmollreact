@@ -30,7 +30,7 @@ export const SearchMoviesList = () => {
                 return <Card key={item.id} style={{ backgroundColor: "rgba(13, 37, 63, .9)" }}
                     className='d-flex flex-row w-100 p-0 mb-3 border-secondary'>
                     <div className='d-flex'>
-                        <Link to={`/pop_movies/image/${item.id}`}
+                        <Link to={`/pop_movies/${item.id}`}
                             onClick={() => { onHandlerCardsInfoMovies(item.id) }}>
                             <Card.Img src={`https://www.themoviedb.org/t/p/w94_and_h141_bestv2${item.backdrop_path}`}
                                 style={{ width: "6rem", objectFit: "cover" }}

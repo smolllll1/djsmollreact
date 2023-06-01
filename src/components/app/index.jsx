@@ -8,8 +8,7 @@ import { Contacts } from '../../pages/contacts';
 import { Registration } from '../../pages/registration';
 import { Login } from '../../pages/login';
 import { MoviesPages } from '../../pages/movies-pages';
-// import MoviesListInfo from '../movies-list-info';
-import MoviesListTest from '../movies-list-info';
+import MoviesListInfo from '../movies-list-info';
 import { PeoplePages } from '../../pages/people-pages';
 import { PeopleListInfo } from '../people-list-info';
 import { Search } from "../../pages/search";
@@ -80,8 +79,7 @@ const App = () => {
                     <Route exact path="search_people" element={<SearchPeopleList />} />
                     {/* content pages */}
                     <Route exact path="pop_movies" element={<MoviesPages />} />
-                    {/* <Route exact path="pop_movies/image/:moviesId" element={<MoviesListInfo />} /> */}
-                    <Route exact path="pop_movies/image/:moviesId" element={<MoviesListTest />} />
+                    <Route exact path="pop_movies/:moviesId" element={<MoviesListInfo />} />
                     <Route exact path="pop_people" element={<PeoplePages />} />
                     <Route exact path="pop_people/:personId" element={<PeopleListInfo />} />
                     {/* page under development */}

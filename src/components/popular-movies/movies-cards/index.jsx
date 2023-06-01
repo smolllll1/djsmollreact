@@ -18,7 +18,7 @@ const MoviesCards = ({ item }) => {
                     }}>
                     <Link
                         id={item.id}
-                        to={`/pop_movies/image/${item.id}`}
+                        to={`/pop_movies/${item.id}`}
                         title={item.title}
                         alt={item.title}>
                         <Card.Img variant="top"
