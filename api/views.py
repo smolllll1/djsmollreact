@@ -36,11 +36,6 @@ class SearchPagination(PageNumberPagination):
     page_size_query_param = 'page_size'
     max_page_size = 1
 
-    def get_paginated_response(self, data):
-        response = super().get_paginated_response(data)
-        response.data['total_pages'] = self.page.paginator.num_pages
-        return response
-
 class ImagePeopleViewSet(viewsets.ModelViewSet):
     queryset = People.objects.all()
     serializer_class = PeopleSerializer
@@ -51,6 +46,7 @@ class ImageMoviesViewSet(viewsets.ModelViewSet):
     serializer_class = MovieSerializer
     pagination_class = SearchPagination 
 
+#Search fron people
 class SearchPeopleViewSet(viewsets.ModelViewSet):
     queryset = People.objects.all()
     serializer_class = PeopleSerializer
@@ -58,6 +54,7 @@ class SearchPeopleViewSet(viewsets.ModelViewSet):
     filter_backends = [filters.SearchFilter]
     search_fields = ['name']  
 
+#Search from movies
 class SearchMoviesViewSet(viewsets.ModelViewSet):
     queryset = Movies.objects.all()
     serializer_class = MovieSerializer
@@ -65,7 +62,7 @@ class SearchMoviesViewSet(viewsets.ModelViewSet):
     filter_backends = [filters.SearchFilter]
     search_fields = ['title']  
 
-
+#from pop_people
 class PeopleViewSet(generics.ListAPIView, mixins.CreateModelMixin,
                 mixins.RetrieveModelMixin,
                 mixins.UpdateModelMixin,
@@ -86,7 +83,7 @@ class PeopleViewSet(generics.ListAPIView, mixins.CreateModelMixin,
         serialized_data['people_scroll_url'] = 'http://image.tmdb.org/t/p/w500'
         return Response(serialized_data)
     
-
+#from movies
 class MoviesViewSet(generics.ListAPIView, mixins.CreateModelMixin,
                 mixins.RetrieveModelMixin,
                 mixins.UpdateModelMixin,
@@ -107,6 +104,7 @@ class MoviesViewSet(generics.ListAPIView, mixins.CreateModelMixin,
         serialized_data['movies_select_url'] = 'https://www.themoviedb.org/t/p/w94_and_h141_bestv2'
         return Response(serialized_data)
 
+#from users/account/ 
 @api_view(['POST'])
 def notification(request):
     email = request.data.get('email') 
@@ -229,11 +227,12 @@ def add_people(request, pk=1):
     return Response(json_data)
 
 #Add user profile data
-
-@permission_classes([IsAuthenticated])
-@api_view(['POST'])
+# @permission_classes([IsAuthenticated])
+@api_view(['GET'])
 def add_movies_in_account(request):
-    id_movie = request.data.get('id')
+    print(request.data)
+    id_movie = request.data.get('id_buy_movie')
+    print(id_movie)
     serializer = UserFileSerializer(data={'name':f'{request.user}', 'id_movie': f'{id_movie}'})
     primary_movie = AddMovies.objects.filter(id_movie=id_movie)
     if not primary_movie:
