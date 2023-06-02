@@ -4,6 +4,7 @@ import Card from 'react-bootstrap/Card';
 import Button from '@mui/material/Button';
 import store from "../../redux/store";
 import { ContentData } from '../data/content-data';
+import { AuthenticationData } from '../data/authentication-data';
 import { axiosBaseUrl } from "../../api/axios";
 
 // button style buy movie
@@ -27,23 +28,29 @@ export const ListSelectedMovies = () => {
     const location = useLocation();
     const endUrlAccountUsers = location.pathname.split("/")[3];
     // GET URL BUY MOVIE
-    const BUY_MOVIE_URL = `users/account/${endUrlAccountUsers}`;
+    const BUY_MOVIE_URL = `users/account/${endUrlAccountUsers}/`;
 
     // object store data movies 
     const storeDataMovies = store.getState();
     const { onHandlerCardsInfoMovies } = useContext(ContentData);
+    const { responseLogin } = useContext(AuthenticationData);
+    console.log(responseLogin.username)
+    console.log(responseLogin.password)
 
     const onHandlerDeleteMovie = (value) => {
         storeDataMovies.movie.splice(value, 1);
     };
 
     const onHandlerBuyMovie = async (value) => {
-        console.log(value)
         try {
             const response = await axiosBaseUrl({
                 method: "post", url: BUY_MOVIE_URL,
+                auth: {
+                    username: responseLogin.username,
+                    password: responseLogin.password,
+                },
                 data: {
-                    id: value,
+                    id_buy_movie: value,
                 },
             })
             if (response.status === 200) {
@@ -52,13 +59,6 @@ export const ListSelectedMovies = () => {
         } catch (error) {
             console.log(error)
         }
-        // await axiosBaseUrl.get(BUY_MOVIE_URL, value)
-        //     .then(response => {
-        //         console.log(response.data);
-        //     })
-        //     .catch(error => {
-        //         console.log(error.message);
-        //     });
     };
 
     return (
