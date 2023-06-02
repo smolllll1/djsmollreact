@@ -38,10 +38,10 @@ export const ListSelectedMovies = () => {
     };
 
     const onHandlerBuyMovie = async (value) => {
-        console.log(value.toString())
+        console.log(value)
         try {
             const response = await axiosBaseUrl({
-                method: "GET", url: BUY_MOVIE_URL,
+                method: "get", url: BUY_MOVIE_URL,
                 data: {
                     id_buy_movie: "data",
                 },
