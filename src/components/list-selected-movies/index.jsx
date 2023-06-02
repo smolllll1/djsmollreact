@@ -41,14 +41,13 @@ export const ListSelectedMovies = () => {
         console.log(value)
         try {
             const response = await axiosBaseUrl({
-                method: "get", url: BUY_MOVIE_URL,
+                method: "post", url: BUY_MOVIE_URL,
                 data: {
-                    id: value
+                    id: value,
                 },
             })
             if (response.status === 200) {
                 console.log(response.data)
-                console.log(value)
             }
         } catch (error) {
             console.log(error)
@@ -96,7 +95,7 @@ export const ListSelectedMovies = () => {
                         <div className='d-flex p-0 px-2'>
                             <Button className="fst-normal"
                                 variant="contained"
-                                onClick={() => { onHandlerBuyMovie(item) }}
+                                onClick={() => { onHandlerBuyMovie(item.id) }}
                                 sx={useStyleBtnBuyMovies.button}>
                                 Buy Movie
                             </Button>
