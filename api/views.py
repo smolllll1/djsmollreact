@@ -148,7 +148,6 @@ def register(request):
 
 
 @api_view(['POST', 'DELETE'])
-@permission_classes([IsAuthenticated])
 @authentication_classes([BasicAuthentication])
 def user(request: Request):
     if request.method == 'POST':
@@ -173,12 +172,19 @@ def user(request: Request):
             atribyt = [f'{i}' for i in filter_name]
             add_last_login = LoginSerializer(request.user).data            
             add_last_login['last_login'] = atribyt
-            return Response({
-                'loginRespons': add_last_login})
+            add_last_login['password'] = password
+            user_movies = AddMovies.objects.filter(name=username)
+            add_user_movies = []
+            for i in user_movies:
+                serializer_user_movies = UserFileSerializer(i)
+                add_user_movies.append(serializer_user_movies.data)                    
+            add_last_login['user_movies'] = add_user_movies
+            return Response({'loginRespons': add_last_login})
         except User.DoesNotExist:
             return ValidationError('User not found')
         
     if request.method == 'DELETE':
+            print(request.data)
             username = request.data.get('name')
             try:
                 user = User.objects.get(username=username)
@@ -227,15 +233,14 @@ def add_people(request, pk=1):
     return Response(json_data)
 
 #Add user profile data
-# @permission_classes([IsAuthenticated])
-@api_view(['GET'])
-def add_movies_in_account(request):
-    print(request.data)
+@permission_classes([IsAuthenticated])
+@api_view(['POST'])
+def add_movies_in_account(request, pk=''):
     id_movie = request.data.get('id_buy_movie')
-    print(id_movie)
-    serializer = UserFileSerializer(data={'name':f'{request.user}', 'id_movie': f'{id_movie}'})
+    serializer = UserFileSerializer(data={'name':f'{pk}', 'id_movie': f'{id_movie}'})
     primary_movie = AddMovies.objects.filter(id_movie=id_movie)
     if not primary_movie:
+
         if serializer.is_valid():
             serializer.save()
             user_movies = AddMovies.objects.filter(name=request.user)
