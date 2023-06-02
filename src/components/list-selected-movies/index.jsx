@@ -1,13 +1,10 @@
 import React, { Fragment, useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import Card from 'react-bootstrap/Card';
 import Button from '@mui/material/Button';
 import store from "../../redux/store";
 import { ContentData } from '../data/content-data';
 import { axiosBaseUrl } from "../../api/axios";
-
-// GET URL BUY MOVIE
-const BUY_MOVIE_URL = 'users/account/';
 
 // button style buy movie
 const useStyleBtnBuyMovies = {
@@ -26,6 +23,11 @@ const useStyleBtnBuyMovies = {
 }
 
 export const ListSelectedMovies = () => {
+
+    const location = useLocation();
+    const endUrlAccountUsers = location.pathname.split("/")[3];
+    // GET URL BUY MOVIE
+    const BUY_MOVIE_URL = `users/account/${endUrlAccountUsers}`;
 
     // object store data movies 
     const storeDataMovies = store.getState();
