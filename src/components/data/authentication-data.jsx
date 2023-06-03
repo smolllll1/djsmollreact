@@ -135,7 +135,7 @@ const AuthenticationDataProvider = ({ children }) => {
         onSubmit: async (values) => {
             try {
                 const response = await axiosBaseUrl({
-                    method: "post", url: LOGIN_URL,
+                    method: "get", url: LOGIN_URL,
                     auth: {
                         username: values.name,
                         password: values.password
