@@ -40,23 +40,30 @@ export const ListSelectedMovies = () => {
     };
 
     const onHandlerBuyMovie = async (value) => {
-        try {
-            const response = await axiosBaseUrl({
-                method: "post", url: BUY_MOVIE_URL,
-                auth: {
-                    username: responseLogin.username,
-                    password: responseLogin.password,
-                },
-                data: {
-                    id_buy_movie: value,
-                },
-            })
-            if (response.status === 200) {
-                console.log(response.data)
-            }
-        } catch (error) {
-            console.log(error)
-        }
+        await axiosBaseUrl.post(BUY_MOVIE_URL, value)
+                .then(response => {
+                    console.log(response.data);
+                }).catch(error => {
+                    console.log(error)
+                });
+
+        // try {
+        //     const response = await axiosBaseUrl({
+        //         method: "post", url: BUY_MOVIE_URL,
+        //         auth: {
+        //             username: responseLogin.username,
+        //             password: responseLogin.password,
+        //         },
+        //         data: {
+        //             id_buy_movie: value,
+        //         },
+        //     })
+        //     if (response.status === 200) {
+        //         console.log(response.data)
+        //     }
+        // } catch (error) {
+        //     console.log(error)
+        // }
     };
 
     return (
