@@ -40,6 +40,7 @@ const FormRegiatration = ({ formikRegistration }) => {
                                 type="text"
                                 name="name"
                                 placeholder="Enter your name"
+                                autoComplete="on"
                                 value={formikRegistration.values.name}
                                 onChange={formikRegistration.handleChange}
                                 onBlur={formikRegistration.handleBlur}
@@ -65,6 +66,7 @@ const FormRegiatration = ({ formikRegistration }) => {
                                 type="tel"
                                 name="phone"
                                 placeholder="Enter your phone"
+                                autoComplete="on"
                                 value={formikRegistration.values.phone}
                                 onChange={formikRegistration.handleChange}
                                 onBlur={formikRegistration.handleBlur}
@@ -90,6 +92,7 @@ const FormRegiatration = ({ formikRegistration }) => {
                                 type="email"
                                 name="email"
                                 placeholder="Enter your email"
+                                autoComplete="on"
                                 value={formikRegistration.values.email}
                                 onChange={formikRegistration.handleChange}
                                 onBlur={formikRegistration.handleBlur}
@@ -104,6 +107,7 @@ const FormRegiatration = ({ formikRegistration }) => {
                             <select className="input-style-registration w-25"
                                 id="country"
                                 name="country"
+                                autoComplete="off"
                                 value={formikRegistration.values.country}
                                 onChange={formikRegistration.handleChange}
                             >

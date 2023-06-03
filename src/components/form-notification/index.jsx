@@ -57,7 +57,8 @@ const FormNotification = () => {
                                 type="email"
                                 name="email"
                                 placeholder="Enter your email"
-                                // autoFocus
+                                autoComplete="on"
+                                autoFocus
                                 value={formikNotification.values.email}
                                 onChange={formikNotification.handleChange}
                                 onBlur={formikNotification.handleBlur}
@@ -80,6 +81,7 @@ const FormNotification = () => {
                                 type="text"
                                 name="subject"
                                 placeholder="Enter your subject"
+                                autoComplete="off"
                                 value={formikNotification.values.subject}
                                 onChange={formikNotification.handleChange}
                                 onBlur={formikNotification.handleBlur}
@@ -102,6 +104,7 @@ const FormNotification = () => {
                                 type="text"
                                 name="notification"
                                 placeholder="Enter your notification"
+                                autoComplete="off"
                                 value={formikNotification.values.notification}
                                 onChange={formikNotification.handleChange}
                                 onBlur={formikNotification.handleBlur}

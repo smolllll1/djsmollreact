@@ -30,6 +30,7 @@ const FormSearch = ({ formikSearch }) => {
                         id="searchValue"
                         type="search"
                         name="searchValue"
+                        autoComplete="on"
                         value={formikSearch.values.searchValue}
                         onChange={formikSearch.handleChange}
                         onBlur={formikSearch.handleBlur}

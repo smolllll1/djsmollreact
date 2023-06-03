@@ -37,6 +37,7 @@ const FormLogin = ({ formikLogin, errMsgLogin }) => {
                                 type="text"
                                 name="name"
                                 placeholder="Enter your name"
+                                autoComplete="on"
                                 value={formikLogin.values.name}
                                 onChange={formikLogin.handleChange}
                                 onBlur={formikLogin.handleBlur}
