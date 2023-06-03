@@ -4,7 +4,7 @@ import Card from 'react-bootstrap/Card';
 import Button from '@mui/material/Button';
 import store from "../../redux/store";
 import { ContentData } from '../data/content-data';
-import { Authentication } from '../data/authentication-data';
+import { AuthenticationData } from '../data/authentication-data';
 import { axiosBaseUrl } from "../../api/axios";
 
 // GET URL BUY MOVIE
