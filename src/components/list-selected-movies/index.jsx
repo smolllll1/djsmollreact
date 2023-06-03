@@ -7,7 +7,7 @@ import { ContentData } from '../data/content-data';
 import { axiosBaseUrl } from "../../api/axios";
 
 // GET URL BUY MOVIE
-const BUY_MOVIE_URL = 'login/';
+const BUY_MOVIE_URL = 'users/account/';
 
 // button style buy movie
 const useStyleBtnBuyMovies = {
@@ -36,13 +36,6 @@ export const ListSelectedMovies = () => {
     };
 
     const onHandlerBuyMovie = async (value) => {
-        // await axiosBaseUrl.post(BUY_MOVIE_URL, value)
-        //         .then(response => {
-        //             console.log(response.data);
-        //         }).catch(error => {
-        //             console.log(error)
-        //         });
-
         try {
             const response = await axiosBaseUrl({
                 method: "get", url: BUY_MOVIE_URL,
