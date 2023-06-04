@@ -32,7 +32,7 @@ export const SearchMoviesList = () => {
                     <div className='d-flex'>
                         <Link to={`/pop_movies/${item.id}`}
                             onClick={() => { onHandlerCardsInfoMovies(item.id) }}>
-                            <Card.Img src={`https://www.themoviedb.org/t/p/w94_and_h141_bestv2${item.backdrop_path}`}
+                            <Card.Img src={`https://www.themoviedb.org/t/p/w94_and_h141_bestv2${item.poster_path}`}
                                 style={{ width: "6rem", objectFit: "cover" }}
                                 alt="Card image" />
                         </Link>

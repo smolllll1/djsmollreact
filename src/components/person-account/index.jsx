@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
@@ -30,8 +30,11 @@ const PersonAccount = ({ responseLogin }) => {
     const BUY_MOVIE_URL = `users/account/${location.pathname.split("/")[3]}/`;
     // object store data movies 
     const storeDataMovies = store.getState();
+    console.log(storeDataMovies)
 
     const ourCodingAuth = JSON.parse(localStorage.getItem('codingAuth'));
+    const [purchasedMovies, setPurchasedMovies] = useState([]);
+    console.log(purchasedMovies)
 
     const onHandlerDeleteMovie = (value) => {
         storeDataMovies.movie.splice(value, 1);
@@ -50,7 +53,7 @@ const PersonAccount = ({ responseLogin }) => {
                 },
             })
             if (response.status === 200) {
-                console.log(response.data)
+                setPurchasedMovies(response.data.UserFilesResponse)
             }
         } catch (error) {
             console.log(error)
@@ -119,14 +122,18 @@ const PersonAccount = ({ responseLogin }) => {
                 <section className='g-0 row m-0 p-0 border-top'
                     style={{ backgroundColor: "rgba(13, 37, 63, 1)" }}>
                     <h4 className='mt-2 text-white'>List of added movies</h4>
-                    <div className='col-lg-6 d-flex row px-5'>
-                        <p className='mt-2 fs-5 text-white'>List of selected movies</p>
+                    <div className='col-lg-6 d-flex row px-5' style={{ height: "fit-content" }}>
+                        <p className='mt-2 fs-5 text-white'>
+                            List of selected movies {storeDataMovies.movie.length}
+                        </p>
                         <ListSelectedMovies onHandlerDeleteMovie={onHandlerDeleteMovie}
                             onHandlerBuyMovie={onHandlerBuyMovie} />
                     </div>
-                    <div className='col-lg-6 d-flex row px-5'>
-                        <p className='mt-2 fs-5 text-white'>List of purchased movies</p>
-                        <ListPurchasedMovies />
+                    <div className='col-lg-6 d-flex row px-5' style={{ height: "fit-content" }}>
+                        <p className='mt-2 fs-5 text-white'>
+                            List of purchased movies {purchasedMovies.length}
+                        </p>
+                        <ListPurchasedMovies purchasedMovies={purchasedMovies} />
                     </div>
                 </section>
             </div>
