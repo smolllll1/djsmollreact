@@ -1,4 +1,4 @@
-
+from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth import logout, authenticate, login
 from django.contrib.auth.models import User
 from rest_framework import viewsets, mixins
@@ -18,6 +18,33 @@ from .models import People, Movies, LastLogin, AddMovies
 from .serializers import RegisterSerializer, LoginSerializer, PeopleSerializer, LastLoginSerializer, MovieSerializer, NotificationSerializer, UserFileSerializer
 
 # Create your views here.
+#Add user profile data
+
+# @csrf_exempt
+# @permission_classes([])
+@permission_classes([IsAuthenticated])
+@authentication_classes([BasicAuthentication])
+@api_view(['POST'])
+def add_movies_in_account(request: Request, pk):
+    print('1111111111111111111111111')
+    print(request.data)
+    user = User.objects.get(username=pk)
+    name = user.username
+    id_movie = request.data.get('id_buy_movie')
+    serializer = UserFileSerializer(data={'name': name, 'id_movie': id_movie})
+    primary_movie = AddMovies.objects.filter(id_movie=id_movie)
+    if not primary_movie:
+
+        if serializer.is_valid():
+            serializer.save()
+            user_movies = AddMovies.objects.filter(name=request.user)
+            respons_objects = []
+            for objects in user_movies:
+                movies_objects = Movies.objects.get(id=objects.id_movie)
+                serializer_movie = MovieSerializer(movies_objects)
+                respons_objects.append(serializer_movie.data)
+            return Response({'UserFilesResponse': respons_objects})
+    return Response({'UserFilesResponse': 'The object is already present!'})
 
 #Pagination for Data
 class DataPagination(PageNumberPagination):
@@ -147,8 +174,8 @@ def register(request):
         return Response({'registrationRespons': data})
 
 
-@api_view(['POST', 'DELETE'])
 @authentication_classes([BasicAuthentication])
+@api_view(['POST', 'DELETE'])
 def user(request: Request):
     if request.method == 'POST':
         username = request.user
@@ -172,7 +199,6 @@ def user(request: Request):
             atribyt = [f'{i}' for i in filter_name]
             add_last_login = LoginSerializer(request.user).data            
             add_last_login['last_login'] = atribyt
-            add_last_login['password'] = password
             user_movies = AddMovies.objects.filter(name=username)
             add_user_movies = []
             for i in user_movies:
@@ -232,23 +258,4 @@ def add_people(request, pk=1):
              pass
     return Response(json_data)
 
-#Add user profile data
-@permission_classes([IsAuthenticated])
-@api_view(['POST'])
-def add_movies_in_account(request, pk=''):
-    id_movie = request.data.get('id_buy_movie')
-    serializer = UserFileSerializer(data={'name':f'{pk}', 'id_movie': f'{id_movie}'})
-    primary_movie = AddMovies.objects.filter(id_movie=id_movie)
-    if not primary_movie:
-
-        if serializer.is_valid():
-            serializer.save()
-            user_movies = AddMovies.objects.filter(name=request.user)
-            respons_objects = []
-            for objects in user_movies:
-                movies_objects = Movies.objects.get(id=objects.id_movie)
-                serializer_movie = MovieSerializer(movies_objects)
-                respons_objects.append(serializer_movie.data)
-            return Response({'UserFilesResponse': respons_objects})
-    return Response({'UserFilesResponse': 'The object is already present!'})
         
