@@ -34,7 +34,6 @@ def add_movies_in_account(request: Request, pk):
     serializer = UserFileSerializer(data={'name': name, 'id_movie': id_movie})
     primary_movie = AddMovies.objects.filter(id_movie=id_movie)
     if not primary_movie:
-
         if serializer.is_valid():
             serializer.save()
             user_movies = AddMovies.objects.filter(name=request.user)
