@@ -8,6 +8,11 @@
 # testing
 /coverage
 
+#__pycache__
+/api/__pycache__
+/api/api/__pycache__
+/backend_django_rest/__pycache__
+
 # production
 /build
 
