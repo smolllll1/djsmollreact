@@ -32,8 +32,10 @@ export const ListSelectedMovies = () => {
     const storeDataMovies = store.getState();
     const { onHandlerCardsInfoMovies } = useContext(ContentData);
     const { responseLogin } = useContext(AuthenticationData);
-    
-    const ourCodingAuth = JSON.parse(localStorage.getItem('codingAuth'))
+
+    const ourCodingAuth = JSON.parse(localStorage.getItem('codingAuth'));
+    console.log(ourCodingAuth)
+    console.log(responseLogin)
 
     const onHandlerDeleteMovie = (value) => {
         storeDataMovies.movie.splice(value, 1);
@@ -44,7 +46,7 @@ export const ListSelectedMovies = () => {
             const response = await axiosBaseUrl({
                 method: "post", url: BUY_MOVIE_URL,
                 headers: {
-                    Authorization: `Basic${ourCodingAuth}`,
+                    Authorization: `Basic ${ourCodingAuth}`,
                 },
                 data: {
                     id_buy_movie: value,

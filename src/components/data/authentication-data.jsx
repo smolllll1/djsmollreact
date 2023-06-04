@@ -196,6 +196,7 @@ const AuthenticationDataProvider = ({ children }) => {
             if (response.status === 200) {
                 cleanUsersData();
                 localStorage.removeItem('user');
+                localStorage.removeItem('codingAuth');
                 setDeleteAccount(true);
                 navigate('/');
             }
