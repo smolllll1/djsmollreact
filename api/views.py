@@ -26,14 +26,13 @@ from .serializers import RegisterSerializer, LoginSerializer, PeopleSerializer, 
 @authentication_classes([BasicAuthentication])
 @api_view(['POST'])
 def add_movies_in_account(request: Request, pk):
-    print('1111111111111111111111111')
-    print(request.data)
     user = User.objects.get(username=pk)
     name = user.username
     id_movie = request.data.get('id_buy_movie')
     serializer = UserFileSerializer(data={'name': name, 'id_movie': id_movie})
-    primary_movie = AddMovies.objects.filter(id_movie=id_movie)
-    if not primary_movie:
+    primary_user = AddMovies.objects.filter(name=request.user)
+    exists_objects = primary_user.filter(id_movie=id_movie)
+    if not exists_objects :
         if serializer.is_valid():
             serializer.save()
             user_movies = AddMovies.objects.filter(name=request.user)
