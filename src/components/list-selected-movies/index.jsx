@@ -43,12 +43,12 @@ export const ListSelectedMovies = () => {
         try {
             const response = await axiosBaseUrl({
                 method: "post", url: BUY_MOVIE_URL,
+                headers: {
+                    Authorization: `Basic${ourCodingAuth}`,
+                },
                 data: {
                     id_buy_movie: value,
                     name: responseLogin.username,
-                },
-                headers: {
-                    Authorization: `Basic ${ourCodingAuth}`,
                 },
             })
             if (response.status === 200) {
