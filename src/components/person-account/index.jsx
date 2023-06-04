@@ -1,10 +1,12 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import { motion as m } from "framer-motion";
 import { ListSelectedMovies } from '../list-selected-movies';
 import { ListPurchasedMovies } from '../list-purchased-movies';
+import store from "../../redux/store";
+import { axiosBaseUrl } from "../../api/axios";
 
 import './person-account.css';
 
@@ -22,6 +24,38 @@ const myStyleAccountUserBtn = {
 }
 
 const PersonAccount = ({ responseLogin }) => {
+
+    const location = useLocation();
+    // GET URL BUY MOVIE
+    const BUY_MOVIE_URL = `users/account/${location.pathname.split("/")[3]}/`;
+    // object store data movies 
+    const storeDataMovies = store.getState();
+
+    const ourCodingAuth = JSON.parse(localStorage.getItem('codingAuth'));
+
+    const onHandlerDeleteMovie = (value) => {
+        storeDataMovies.movie.splice(value, 1);
+    };
+
+    const onHandlerBuyMovie = async (value) => {
+        try {
+            const response = await axiosBaseUrl({
+                method: "post", url: BUY_MOVIE_URL,
+                headers: {
+                    Authorization: `Basic ${ourCodingAuth}`,
+                },
+                data: {
+                    id_buy_movie: value,
+                    name: responseLogin.username,
+                },
+            })
+            if (response.status === 200) {
+                console.log(response.data)
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    };
 
     return (
         <m.div
@@ -87,7 +121,8 @@ const PersonAccount = ({ responseLogin }) => {
                     <h4 className='mt-2 text-white'>List of added movies</h4>
                     <div className='col-lg-6 d-flex row px-5'>
                         <p className='mt-2 fs-5 text-white'>List of selected movies</p>
-                        <ListSelectedMovies />
+                        <ListSelectedMovies onHandlerDeleteMovie={onHandlerDeleteMovie}
+                            onHandlerBuyMovie={onHandlerBuyMovie} />
                     </div>
                     <div className='col-lg-6 d-flex row px-5'>
                         <p className='mt-2 fs-5 text-white'>List of purchased movies</p>

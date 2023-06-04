@@ -1,11 +1,9 @@
 import React, { Fragment, useContext } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Card from 'react-bootstrap/Card';
 import Button from '@mui/material/Button';
 import store from "../../redux/store";
 import { ContentData } from '../data/content-data';
-import { AuthenticationData } from '../data/authentication-data';
-import { axiosBaseUrl } from "../../api/axios";
 
 // button style buy movie
 const useStyleBtnBuyMovies = {
@@ -23,43 +21,10 @@ const useStyleBtnBuyMovies = {
     }
 }
 
-export const ListSelectedMovies = () => {
+export const ListSelectedMovies = ({onHandlerDeleteMovie, onHandlerBuyMovie}) => {
 
-    const location = useLocation();
-    // GET URL BUY MOVIE
-    const BUY_MOVIE_URL = `users/account/${location.pathname.split("/")[3]}/`;
-    // object store data movies 
     const storeDataMovies = store.getState();
     const { onHandlerCardsInfoMovies } = useContext(ContentData);
-    const { responseLogin } = useContext(AuthenticationData);
-
-    const ourCodingAuth = JSON.parse(localStorage.getItem('codingAuth'));
-    console.log(ourCodingAuth)
-    console.log(responseLogin)
-
-    const onHandlerDeleteMovie = (value) => {
-        storeDataMovies.movie.splice(value, 1);
-    };
-
-    const onHandlerBuyMovie = async (value) => {
-        try {
-            const response = await axiosBaseUrl({
-                method: "post", url: BUY_MOVIE_URL,
-                headers: {
-                    Authorization: `Basic ${ourCodingAuth}`,
-                },
-                data: {
-                    id_buy_movie: value,
-                    name: responseLogin.username,
-                },
-            })
-            if (response.status === 200) {
-                console.log(response.data)
-            }
-        } catch (error) {
-            console.log(error)
-        }
-    };
 
     return (
         <Fragment>
