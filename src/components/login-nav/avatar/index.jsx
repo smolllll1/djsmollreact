@@ -7,15 +7,21 @@ import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import { Link } from "react-router-dom";
+import store from "../../../redux/store";
 
 export default function AccountMenu({ onHandlerLogout, responseLogin }) {
 
+    const storeDataMovies = store.getState();
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
 
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
     };
+
+    const removeMoviesSelectedList = () => {
+        storeDataMovies.movie.splice(0,);
+    }
 
     const handleClose = () => {
         setAnchorEl(null);
@@ -110,7 +116,8 @@ export default function AccountMenu({ onHandlerLogout, responseLogin }) {
                     </Link>
                 </MenuItem>
                 <Divider />
-                <MenuItem sx={myStyleMenuItem.li} onClick={(() => { onHandlerLogout(); handleClose(); })}>
+                <MenuItem sx={myStyleMenuItem.li}
+                    onClick={(() => { onHandlerLogout(); removeMoviesSelectedList(); handleClose(); })}>
                     <Link to={'/'} className="text-decoration-none link-avatar">
                         Logout
                     </Link>

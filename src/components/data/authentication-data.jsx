@@ -143,6 +143,8 @@ const AuthenticationDataProvider = ({ children }) => {
                 })
                 if (response.status === 200) {
                     localStorage.setItem("user", JSON.stringify(response.data.loginRespons));
+                    const codingAuth = window.btoa(`${values.name}:${values.password}`);
+                    localStorage.setItem("codingAuth", JSON.stringify(codingAuth));
                     navigate(`/users/account/${response.data.loginRespons?.username}`);
                     setTimeout(() => {
                         cleanLoginValue();
@@ -172,13 +174,14 @@ const AuthenticationDataProvider = ({ children }) => {
                 setResponseLogout(response.data);
                 setTimeout(() => {
                     setResponseLogout(null);
-                }, 10000)
+                }, 5000)
             })
             .catch(error => {
                 setErrMsgLogout(error.message);
             });
 
         localStorage.removeItem('user');
+        localStorage.removeItem('codingAuth');
     }
 
     // delete account

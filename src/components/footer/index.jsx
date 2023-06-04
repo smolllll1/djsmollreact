@@ -10,8 +10,8 @@ const Footer = () => {
     const { responseLogin } = useContext(AuthenticationData);
 
     return (
-        <footer className="d-flex row w-100">
-            <nav className="d-flex justify-content-around w-100 text-white flex-wrap py-4">
+        <footer className="d-flex row w-100 m-0">
+            <nav className="d-flex justify-content-around w-100 text-white flex-wrap pt-4 gap-3">
                 <div>
                     <Link to={`/`}>
                         <img src={logo} alt="logo" width={100} />
@@ -80,7 +80,9 @@ const Footer = () => {
                     </ul>
                 </div>
             </nav>
-            <section>Build 2023 (april)</section>
+            <section>
+                <Link to={"updated"} className="text-decoration-none text-secondary">Build 2023</Link>
+            </section>
         </footer>
     )
 }
