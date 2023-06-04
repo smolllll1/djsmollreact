@@ -22,5 +22,6 @@ urlpatterns = [
     path('login/', views.user, name='login'),
     path('logout/', views.logout_view, name='logout'), 
     path('about/', views.notification, name='notification'),
-    path('users/account/<str:pk>/', views.add_movies_in_account, name='add_movies_in_account')
+    path('users/account/<str:pk>/', views.add_movies_in_account, name='add_movies_in_account'),
+    path('users/account/', views.movies_in_account, name='add_movies_in_account')
 ]
