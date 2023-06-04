@@ -19,13 +19,13 @@ export default function AccountMenu({ onHandlerLogout, responseLogin }) {
         setAnchorEl(event.currentTarget);
     };
 
-    const removeMoviesSelectedList = () => {
-        storeDataMovies.movie.splice(0,);
-    }
-
     const handleClose = () => {
         setAnchorEl(null);
     };
+
+    const removeMoviesSelectedList = () => {
+        storeDataMovies.movie.splice(0,);
+    }
 
     const myStyleMenuItem = {
         li: {
