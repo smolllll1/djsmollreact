@@ -1,12 +1,15 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { useQuery } from "react-query";
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import { motion as m } from "framer-motion";
 import { ListSelectedMovies } from '../list-selected-movies';
 import { ListPurchasedMovies } from '../list-purchased-movies';
 import store from "../../redux/store";
-import { axiosBaseUrl } from "../../api/axios";
+import { axiosBaseUrl, getPurchasedMovies } from "../../api/axios";
+import CircularStatic from "../progress";
+import Alert from 'react-bootstrap/Alert';
 
 import './person-account.css';
 
@@ -30,11 +33,17 @@ const PersonAccount = ({ responseLogin }) => {
     const BUY_MOVIE_URL = `users/account/${location.pathname.split("/")[3]}/`;
     // object store data movies 
     const storeDataMovies = store.getState();
-    console.log(storeDataMovies)
 
     const ourCodingAuth = JSON.parse(localStorage.getItem('codingAuth'));
-    const [purchasedMovies, setPurchasedMovies] = useState([]);
-    console.log(purchasedMovies)
+
+    const {
+        isLoading,
+        isError,
+        error,
+        data: purchasedMovies,
+    } = useQuery(["users/account"], () => getPurchasedMovies(""), {
+        keepPreviousData: true
+    });
 
     const onHandlerDeleteMovie = (value) => {
         storeDataMovies.movie.splice(value, 1);
@@ -53,12 +62,21 @@ const PersonAccount = ({ responseLogin }) => {
                 },
             })
             if (response.status === 200) {
-                setPurchasedMovies(response.data.UserFilesResponse)
+                console.log(response.data)
             }
         } catch (error) {
             console.log(error)
         }
     };
+
+    if (isLoading) return <div className="text-center vh-100 mt-5">
+        <CircularStatic />
+    </div>;
+    if (isError) return <div className="vh-100 text-secondary text-center mt-5">
+        <Alert variant="danger">
+            Something went wrong! Error: {error.message}
+        </Alert>
+    </div>
 
     return (
         <m.div
@@ -131,7 +149,7 @@ const PersonAccount = ({ responseLogin }) => {
                     </div>
                     <div className='col-lg-6 d-flex row px-5' style={{ height: "fit-content" }}>
                         <p className='mt-2 fs-5 text-white'>
-                            List of purchased movies {purchasedMovies.length}
+                            List of purchased movies {purchasedMovies?.UserFilesResponse.length}
                         </p>
                         <ListPurchasedMovies purchasedMovies={purchasedMovies} />
                     </div>

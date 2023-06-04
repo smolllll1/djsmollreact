@@ -1,15 +1,11 @@
 import React, { Fragment } from 'react';
 import Card from 'react-bootstrap/Card';
-// import store from "../../redux/store";
 
 export const ListPurchasedMovies = ({purchasedMovies}) => {
 
-    // object store data movies 
-    // const storeDataMovies = store.getState();
-
     return (
         <Fragment>
-            {purchasedMovies.map((item, index) => {
+            {purchasedMovies?.UserFilesResponse.map((item, index) => {
                 return <Card key={item.id * index + "b"}
                     style={{ backgroundColor: "#01D277" }}
                     className='d-flex flex-row w-100 p-0 mb-2 border'>

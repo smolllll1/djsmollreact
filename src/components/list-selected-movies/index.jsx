@@ -21,7 +21,7 @@ const useStyleBtnBuyMovies = {
     }
 }
 
-export const ListSelectedMovies = ({onHandlerDeleteMovie, onHandlerBuyMovie}) => {
+export const ListSelectedMovies = ({ onHandlerDeleteMovie, onHandlerBuyMovie }) => {
 
     const storeDataMovies = store.getState();
     const { onHandlerCardsInfoMovies } = useContext(ContentData);
@@ -60,6 +60,7 @@ export const ListSelectedMovies = ({onHandlerDeleteMovie, onHandlerBuyMovie}) =>
                         <div className='d-flex p-0 px-2'>
                             <Button className="fst-normal"
                                 variant="contained"
+                                disabled={false}
                                 onClick={() => { onHandlerBuyMovie(item.id) }}
                                 sx={useStyleBtnBuyMovies.button}>
                                 Buy Movie
