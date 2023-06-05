@@ -1,7 +1,8 @@
-import React, { useState, createContext } from 'react';
+import React, { createContext, useContext } from 'react';
 import { axiosBaseUrl } from "../../api/axios";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { AuthenticationData } from './authentication-data';
 
 // Data with Form-about-message
 const NotificationData = createContext({});
@@ -15,9 +16,11 @@ const ABOUT_URL = 'about/';
 const NotificationDataProvider = ({ children }) => {
 
     // Response Notification backend onSend
-    const [responseNotification, setResponseNotification] = useState(null);
+    // const [responseNotification, setResponseNotification] = useState(null);
     // Error Notification
-    const [errMsgNotification, setErrMsgNotification] = useState('');
+    // const [errMsgNotification, setErrMsgNotification] = useState('');
+
+    const { ourCodingAuth, responseLogin } = useContext(AuthenticationData);
 
     // formikNotification logics
     const formikNotification = useFormik({
@@ -43,15 +46,34 @@ const NotificationDataProvider = ({ children }) => {
         // Submit form notification
         onSubmit: async (values) => {
             console.log(values)
-            await axiosBaseUrl.post(ABOUT_URL, values)
-                .then(response => {
-                    console.log(response.data);
-                    setResponseNotification(response.data);
+            try {
+                const response = await axiosBaseUrl({
+                    method: "post", url: ABOUT_URL,
+                    headers: {
+                        Authorization: `Basic ${ourCodingAuth}`,
+                    },
+                    data: {
+                        name: responseLogin.username,
+                        email: values.email,
+                        subject: values.subject,
+                        notification: values.notification,
+                    },
                 })
-                .catch(error => {
-                    console.log(error.message);
-                    setErrMsgNotification(error.message);
-                });
+                if (response.status === 200) {
+                    console.log(response.data);
+                }
+            } catch (error) {
+                console.log(error)
+            }
+            // await axiosBaseUrl.post(ABOUT_URL, values)
+            //     .then(response => {
+            //         console.log(response.data);
+            //         setResponseNotification(response.data);
+            //     })
+            //     .catch(error => {
+            //         console.log(error.message);
+            //         setErrMsgNotification(error.message);
+            //     });
 
             cleanNotificationValue();
         }
@@ -67,8 +89,8 @@ const NotificationDataProvider = ({ children }) => {
         <NotificationData.Provider
             value={{
                 formikNotification: formikNotification,
-                responseNotification: responseNotification,
-                errMsgNotification: errMsgNotification,
+                // responseNotification: responseNotification,
+                // errMsgNotification: errMsgNotification,
                 cleanNotificationValue: cleanNotificationValue,
             }}
         >

@@ -34,7 +34,6 @@ const PersonAccount = ({ responseLogin }) => {
     // GET URL BUY MOVIE
     const BUY_MOVIE_URL = `users/account/${location.pathname.split("/")[3]}/`;
     const userName = location.pathname.split("/")[3];
-    console.log(userName)
     // object store data movies 
     const storeDataMovies = store.getState();
 
