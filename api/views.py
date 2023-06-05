@@ -1,4 +1,4 @@
-from django.views.decorators.csrf import csrf_exempt
+from django.db import transaction
 from django.contrib.auth import logout, authenticate, login
 from django.contrib.auth.models import User
 from rest_framework import viewsets, mixins
@@ -19,41 +19,36 @@ from .serializers import RegisterSerializer, LoginSerializer, PeopleSerializer, 
 
 # Create your views here.
 #Add user profile data
-
-# @csrf_exempt
-# @permission_classes([])
 @permission_classes([IsAuthenticated])
 @authentication_classes([BasicAuthentication])
-@api_view(['POST'])
+@api_view(['POST', 'GET'])
 def add_movies_in_account(request: Request, pk):
-    user = User.objects.get(username=pk)
-    name = user.username
-    id_movie = request.data.get('id_buy_movie')
-    serializer = UserFileSerializer(data={'name': name, 'id_movie': id_movie})
-    primary_user = AddMovies.objects.filter(name=request.user)
-    exists_objects = primary_user.filter(id_movie=id_movie)
-    if not exists_objects :
-        if serializer.is_valid():
-            serializer.save()
-            user_movies = AddMovies.objects.filter(name=request.user)
-            respons_objects = []
-            for objects in user_movies:
-                movies_objects = Movies.objects.get(id=objects.id_movie)
-                serializer_movie = MovieSerializer(movies_objects)
-                respons_objects.append(serializer_movie.data)
-            return Response({'UserFilesResponse': respons_objects})
-    return Response({'UserFilesResponse': 'The object is already present!'})
-
-#Movies_uccount for users/account/
-@api_view(['GET'])
-def movies_in_account(request):
-    primary_user = AddMovies.objects.filter(name=request.user)
-    respons_objects = []
-    for objects in primary_user:
-        movies_objects = Movies.objects.get(id=objects.id_movie)
-        serializer_movie = MovieSerializer(movies_objects)
-        respons_objects.append(serializer_movie.data)
-    return Response({'UserFilesResponse': respons_objects})
+    if request.method == 'POST':
+        user = User.objects.get(username=pk)
+        name = user.username
+        id_movie = request.data.get('id_buy_movie')
+        serializer = UserFileSerializer(data={'name': name, 'id_movie': id_movie})
+        primary_user = AddMovies.objects.filter(name=request.user)
+        exists_objects = primary_user.filter(id_movie=id_movie)
+        if not exists_objects :
+            if serializer.is_valid():
+                serializer.save()
+                user_movies = AddMovies.objects.filter(name=request.user)
+                respons_objects = []
+                for objects in user_movies:
+                    movies_objects = Movies.objects.get(id=objects.id_movie)
+                    serializer_movie = MovieSerializer(movies_objects)
+                    respons_objects.append(serializer_movie.data)
+                return Response({'UserFilesResponse': respons_objects})
+        return Response({'UserFilesResponse': 'The object is already present!'})
+    if request.method == 'GET':
+        primary_user = AddMovies.objects.filter(name=request.user)
+        respons_objects = []
+        for objects in primary_user:
+            movies_objects = Movies.objects.get(id=objects.id_movie)
+            serializer_movie = MovieSerializer(movies_objects)
+            respons_objects.append(serializer_movie.data)
+        return Response({'UserFilesResponse': respons_objects})
 
 #Pagination for Data
 class DataPagination(PageNumberPagination):
@@ -222,8 +217,11 @@ def user(request: Request):
             print(request.data)
             username = request.data.get('name')
             try:
+                del_user_movie = AddMovies.objects.filter(name=username)
+                del_user_movie.delete()
                 user = User.objects.get(username=username)
                 user.delete()
+                # transaction.commit()
                 return Response({'message': 'User deleted successfully'})
             except User.DoesNotExist:
                 return Response({'message': 'User not found'}, status=404)
