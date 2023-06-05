@@ -20,7 +20,7 @@ const NotificationDataProvider = ({ children }) => {
     // Error Notification
     // const [errMsgNotification, setErrMsgNotification] = useState('');
 
-    const { ourCodingAuth, responseLogin } = useContext(AuthenticationData);
+    const { ourCodingAuth } = useContext(AuthenticationData);
 
     // formikNotification logics
     const formikNotification = useFormik({
@@ -53,7 +53,6 @@ const NotificationDataProvider = ({ children }) => {
                         Authorization: `Basic ${ourCodingAuth}`,
                     },
                     data: {
-                        name: responseLogin.username,
                         email: values.email,
                         subject: values.subject,
                         notification: values.notification,
