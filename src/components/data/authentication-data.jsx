@@ -42,7 +42,7 @@ const AuthenticationDataProvider = ({ children }) => {
 
     // DELETE ACCOUNT
     const [deleteAccount, setDeleteAccount] = useState(false);
-
+    const ourCodingAuth = JSON.parse(localStorage.getItem('codingAuth'));
     // formikRegistration logics
     const formikRegistration = useFormik({
         initialValues: {
@@ -189,6 +189,9 @@ const AuthenticationDataProvider = ({ children }) => {
         try {
             const response = await axiosBaseUrl({
                 method: "delete", url: LOGIN_URL,
+                headers: {
+                    Authorization: `Basic ${ourCodingAuth}`,
+                },
                 data: {
                     name: responseLogin.username,
                 },
@@ -233,6 +236,7 @@ const AuthenticationDataProvider = ({ children }) => {
             // DELETE ACCOUNT
             deleteAccount: deleteAccount,
             setDeleteAccount: setDeleteAccount,
+            ourCodingAuth: ourCodingAuth,
         }}>
             {children}
         </AuthenticationData.Provider>

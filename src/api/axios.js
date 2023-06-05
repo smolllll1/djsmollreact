@@ -34,7 +34,7 @@ export const getSearchMovies = async (value) => {
   return response.data;
 };
 // purchased movies request
-export const getPurchasedMovies = async () => {
-  const response = await axiosBaseUrl.get(`users/account/`);
+export const getPurchasedMovies = async (userName) => {
+  const response = await axiosBaseUrl.get(`users/account/${userName}/`);
   return response.data;
 };

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useQuery } from "react-query";
 import Stack from '@mui/material/Stack';
@@ -10,6 +10,7 @@ import store from "../../redux/store";
 import { axiosBaseUrl, getPurchasedMovies } from "../../api/axios";
 import CircularStatic from "../progress";
 import Alert from 'react-bootstrap/Alert';
+import {AuthenticationData} from "../data/authentication-data";
 
 import './person-account.css';
 
@@ -29,19 +30,20 @@ const myStyleAccountUserBtn = {
 const PersonAccount = ({ responseLogin }) => {
 
     const location = useLocation();
+    const {ourCodingAuth} = useContext(AuthenticationData);
     // GET URL BUY MOVIE
     const BUY_MOVIE_URL = `users/account/${location.pathname.split("/")[3]}/`;
+    const userName = location.pathname.split("/")[3];
+    console.log(userName)
     // object store data movies 
     const storeDataMovies = store.getState();
-
-    const ourCodingAuth = JSON.parse(localStorage.getItem('codingAuth'));
 
     const {
         isLoading,
         isError,
         error,
         data: purchasedMovies,
-    } = useQuery(["users/account"], () => getPurchasedMovies(""), {
+    } = useQuery(["users/account", userName], () => getPurchasedMovies(userName), {
         keepPreviousData: true
     });
 
