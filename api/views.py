@@ -48,7 +48,7 @@ def add_movies_in_account(request: Request, pk):
             movies_objects = Movies.objects.get(id=objects.id_movie)
             serializer_movie = MovieSerializer(movies_objects)
             respons_objects.append(serializer_movie.data)
-        return Response({respons_objects})
+        return Response({'UserFilesResponse': respons_objects})
 
 #Pagination for Data
 class DataPagination(PageNumberPagination):
