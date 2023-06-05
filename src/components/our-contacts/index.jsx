@@ -14,7 +14,7 @@ const OurContacts = () => {
             style={{ backgroundColor: "#ffffff" }}>
             <div className='col-md-4 d-flex justify-content-center'>
                 <Stack direction="row" spacing={2} sx={{ borderTop: '10px' }}>
-                    <Paper className='mt-3 mb-3 mx-5' style={{ width: "300px" }}>
+                    <Paper className='mt-3 mb-3 mx-5' style={{ width: "300px", height:"fit-content" }}>
                         <MenuList className='p-0'>
                             <li className='px-3 py-2 rounded-top'
                                 style={{

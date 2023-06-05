@@ -21,7 +21,7 @@ const useStyleBtnBuyMovies = {
     }
 }
 
-export const ListSelectedMovies = ({onHandlerDeleteMovie, onHandlerBuyMovie}) => {
+export const ListSelectedMovies = ({ onHandlerDeleteMovie, onHandlerBuyMovie }) => {
 
     const storeDataMovies = store.getState();
     const { onHandlerCardsInfoMovies } = useContext(ContentData);
@@ -35,7 +35,7 @@ export const ListSelectedMovies = ({onHandlerDeleteMovie, onHandlerBuyMovie}) =>
                     <div className='d-flex'>
                         <Link to={`/pop_movies/${item.id}`}
                             onClick={() => { onHandlerCardsInfoMovies(item.id) }}>
-                            <Card.Img src={`https://www.themoviedb.org/t/p/w94_and_h141_bestv2${item.backdrop_path}`}
+                            <Card.Img src={`https://www.themoviedb.org/t/p/w94_and_h141_bestv2${item.poster_path}`}
                                 style={{ width: "4rem", objectFit: "cover" }}
                                 alt="Card image" />
                         </Link>
@@ -60,6 +60,7 @@ export const ListSelectedMovies = ({onHandlerDeleteMovie, onHandlerBuyMovie}) =>
                         <div className='d-flex p-0 px-2'>
                             <Button className="fst-normal"
                                 variant="contained"
+                                disabled={false}
                                 onClick={() => { onHandlerBuyMovie(item.id) }}
                                 sx={useStyleBtnBuyMovies.button}>
                                 Buy Movie

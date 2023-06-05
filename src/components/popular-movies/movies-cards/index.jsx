@@ -13,7 +13,7 @@ const MoviesCards = ({ item }) => {
             <m.div layout>
                 <Card
                     style={{
-                        width: '16rem',
+                        width: '14rem',
                         boxShadow: "4px 5px 5px -4px rgba(13, 37, 63)",
                     }}>
                     <Link
@@ -22,8 +22,8 @@ const MoviesCards = ({ item }) => {
                         title={item.title}
                         alt={item.title}>
                         <Card.Img variant="top"
-                            style={{ height: "10rem", objectFit: "cover", cursor: "pointer" }}
-                            src={`https://image.tmdb.org/t/p/w500${item.backdrop_path}`}
+                            style={{ width:"100%", height:"333px", objectFit: "cover", cursor: "pointer" }}
+                            src={`https://image.tmdb.org/t/p/w500${item.poster_path}`}
                             alt={item.title}
                             onClick={() => { onHandlerCardsInfoMovies(item.id) }}
                         />
@@ -31,8 +31,8 @@ const MoviesCards = ({ item }) => {
                     <Card.Body
                         style={{ height: "7rem" }}
                     >
-                        <Card.Title style={{ fontSize: "1rem" }}>{item.title}</Card.Title>
-                        <Card.Text style={{ fontSize: "1rem" }}>{item.release_date}</Card.Text>
+                        <Card.Title style={{ fontSize: "0.875rem" }}>{item.title}</Card.Title>
+                        <Card.Text style={{ fontSize: "0.875rem" }}>{item.release_date}</Card.Text>
                     </Card.Body>
                 </Card>
             </m.div>

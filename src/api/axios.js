@@ -33,3 +33,8 @@ export const getSearchMovies = async (value) => {
   const response = await axiosBaseUrl.get(`search/search_movies/?search=${value}`);
   return response.data;
 };
+// purchased movies request
+export const getPurchasedMovies = async () => {
+  const response = await axiosBaseUrl.get(`users/account/`);
+  return response.data;
+};
