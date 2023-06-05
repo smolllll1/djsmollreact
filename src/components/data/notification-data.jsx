@@ -59,7 +59,7 @@ const NotificationDataProvider = ({ children }) => {
                     },
                 })
                 if (response.status === 200) {
-                    console.log(response.data);
+                    console.log(response);
                 }
             } catch (error) {
                 console.log(error)
