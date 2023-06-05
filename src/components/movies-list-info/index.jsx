@@ -81,7 +81,7 @@ const MoviesListInfo = ({ addNewMovie }) => {
                             alt={listInfoMovies.title} />
                         <div className="row g-0">
                             <div className="col-lg-5 d-flex p-4 vh-100 justify-content-center align-items-center">
-                                <div className="w-100 h-100 d-flex">
+                                <div className="w-100 h-100 d-flex justify-content-center">
                                     <Link onClick={() => { navigate(-1) }}>
                                         <img src={`https://image.tmdb.org/t/p/original${listInfoMovies.poster_path}`}
                                             className="rounded"

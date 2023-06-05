@@ -31,8 +31,8 @@ const MoviesCards = ({ item }) => {
                     <Card.Body
                         style={{ height: "7rem" }}
                     >
-                        <Card.Title style={{ fontSize: "1rem" }}>{item.title}</Card.Title>
-                        <Card.Text style={{ fontSize: "1rem" }}>{item.release_date}</Card.Text>
+                        <Card.Title style={{ fontSize: "0.875rem" }}>{item.title}</Card.Title>
+                        <Card.Text style={{ fontSize: "0.875rem" }}>{item.release_date}</Card.Text>
                     </Card.Body>
                 </Card>
             </m.div>
