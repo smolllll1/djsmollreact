@@ -39,7 +39,7 @@ def add_movies_in_account(request: Request, pk):
                     movies_objects = Movies.objects.get(id=objects.id_movie)
                     serializer_movie = MovieSerializer(movies_objects)
                     respons_objects.append(serializer_movie.data)
-                return Response({'UserFilesResponse': respons_objects})
+                return Response({'message': 'Successful movie purchase!'})
         return Response({'UserFilesResponse': 'The object is already present!'})
     if request.method == 'GET':
         primary_user = AddMovies.objects.filter(name=request.user)
@@ -139,7 +139,7 @@ class MoviesViewSet(generics.ListAPIView, mixins.CreateModelMixin,
 @api_view(['POST'])
 def notification(request):
     email = request.data.get('email') 
-    name = User.objects.filter(email=email)
+    name = User.objects.get(username=email)
     if name:
         username_list = name.values_list('username', flat=True)
         data = request.data
