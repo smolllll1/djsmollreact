@@ -23,7 +23,7 @@ export default function MoreMenuButton() {
       }
     },
   }
-  
+
   return (
     <div>
       <Button
@@ -49,6 +49,10 @@ export default function MoreMenuButton() {
         open={open}
         onClose={handleClose}
         MenuListProps={{
+          sx: {
+            width: "150px"
+          },
+
           'aria-labelledby': 'basic-button',
         }}
       >

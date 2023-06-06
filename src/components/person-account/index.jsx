@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, { useContext, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useQuery } from "react-query";
 import Stack from '@mui/material/Stack';
@@ -10,7 +10,7 @@ import store from "../../redux/store";
 import { axiosBaseUrl, getPurchasedMovies } from "../../api/axios";
 import CircularStatic from "../progress";
 import Alert from 'react-bootstrap/Alert';
-import {AuthenticationData} from "../data/authentication-data";
+import { AuthenticationData } from "../data/authentication-data";
 
 import './person-account.css';
 
@@ -30,12 +30,16 @@ const myStyleAccountUserBtn = {
 const PersonAccount = ({ responseLogin }) => {
 
     const location = useLocation();
-    const {ourCodingAuth} = useContext(AuthenticationData);
+    const { ourCodingAuth } = useContext(AuthenticationData);
     // GET URL BUY MOVIE
     const BUY_MOVIE_URL = `users/account/${location.pathname.split("/")[3]}/`;
     const userName = location.pathname.split("/")[3];
     // object store data movies 
     const storeDataMovies = store.getState();
+    // message "This movie exists in the purchased list"
+    const [messageMovieExists, setMessageMovieExists] = useState("");
+    console.log(messageMovieExists);
+    const [messageMovieFlag, setMessageMovieFlag] = useState(false);
 
     const {
         isLoading,
@@ -52,6 +56,7 @@ const PersonAccount = ({ responseLogin }) => {
     };
 
     const onHandlerBuyMovie = async (value) => {
+        setMessageMovieFlag(true)
         try {
             const response = await axiosBaseUrl({
                 method: "post", url: BUY_MOVIE_URL,
@@ -65,6 +70,7 @@ const PersonAccount = ({ responseLogin }) => {
             })
             if (response.status === 200) {
                 console.log(response.data)
+                setMessageMovieExists(response.data)
             }
         } catch (error) {
             console.log(error)
@@ -146,14 +152,24 @@ const PersonAccount = ({ responseLogin }) => {
                         <p className='mt-2 fs-5 text-white'>
                             List of selected movies {storeDataMovies.movie.length}
                         </p>
+                        {messageMovieExists?.message === "The object is already present!"
+                            && storeDataMovies.movie.length !== 0
+                            && messageMovieFlag === true
+                            ?
+                            <Alert variant="warning">
+                                This movie exists in the purchased list
+                            </Alert>
+                            :
+                            null
+                        }
                         <ListSelectedMovies onHandlerDeleteMovie={onHandlerDeleteMovie}
-                            onHandlerBuyMovie={onHandlerBuyMovie} userName={userName}/>
+                            onHandlerBuyMovie={onHandlerBuyMovie} userName={userName} />
                     </div>
-                    <div className='col-lg-6 d-flex row px-5' style={{ height: "fit-content" }}>
+                    <div className='col-lg-6 d-flex row flex-column-reverse px-5' style={{ height: "fit-content" }}>
+                        <ListPurchasedMovies purchasedMovies={purchasedMovies} />
                         <p className='mt-2 fs-5 text-white'>
                             List of purchased movies {purchasedMovies?.userFilesResponse.length}
                         </p>
-                        <ListPurchasedMovies purchasedMovies={purchasedMovies} />
                     </div>
                 </section>
             </div>

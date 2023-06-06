@@ -17,7 +17,7 @@ const SearchValueProvider = ({ children }) => {
     const [isSearchValue, setIsSearchValue] = useState("");
 
     useEffect(() => {
-        setIsSearchValue(location?.search.split("=")[1] || null)
+        setIsSearchValue(location?.search.split("=")[1] || "?")
     }, [location?.search])
 
     // formikSearch logics
