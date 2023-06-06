@@ -39,7 +39,7 @@ def add_movies_in_account(request: Request, pk):
                     movies_objects = Movies.objects.get(id=objects.id_movie)
                     serializer_movie = MovieSerializer(movies_objects)
                     respons_objects.append(serializer_movie.data)
-                return Response({'userFilesResponse': respons_objects})
+                return Response({'objectsResponse': respons_objects})
         return Response({'message': 'The object is already present!'})
     if request.method == 'GET':
         primary_user = AddMovies.objects.filter(name=pk)
