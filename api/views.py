@@ -39,16 +39,16 @@ def add_movies_in_account(request: Request, pk):
                     movies_objects = Movies.objects.get(id=objects.id_movie)
                     serializer_movie = MovieSerializer(movies_objects)
                     respons_objects.append(serializer_movie.data)
-                return Response({'UserFilesResponse': respons_objects})
-        return Response({'UserFilesResponse': 'The object is already present!'})
+                return Response({'userFilesResponse': respons_objects})
+        return Response({'message': 'The object is already present!'})
     if request.method == 'GET':
-        primary_user = AddMovies.objects.filter(name=request.user)
+        primary_user = AddMovies.objects.filter(name=pk)
         respons_objects = []
         for objects in primary_user:
             movies_objects = Movies.objects.get(id=objects.id_movie)
             serializer_movie = MovieSerializer(movies_objects)
             respons_objects.append(serializer_movie.data)
-        return Response({'UserFilesResponse': respons_objects})
+        return Response({'userFilesResponse': respons_objects})
 
 #Pagination for Data
 class DataPagination(PageNumberPagination):

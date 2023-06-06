@@ -32,8 +32,8 @@ SECRET_KEY = 'django-insecure-u*owrpiap^&vd2l8y5l1od$)lq9bdf*d8(-g_3+9b#obcb##ad
 # DB_PASSWORD = os.environ.get('DB_PASSWORD')
 
 
-# CSRF_TRUSTED_ORIGINS = ['http://localhost:3', 'http://localhost:8000', 'http://127.0.0.1:8000/', 'http://127.0.0.1:8000/users/account/']
-CSRF_TRUSTED_ORIGINS = ['http://127.0.0.1', 'http://localhost', 'http://localhost:3000', 'http://localhost:8000']
+CSRF_TRUSTED_ORIGINS = ['http://localhost:3000', 'http://localhost:8000', 'http://127.0.0.1:8000/']
+# CSRF_TRUSTED_ORIGINS = ['http://127.0.0.1', 'http://localhost', 'http://localhost:3000', 'http://localhost:8000']
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
