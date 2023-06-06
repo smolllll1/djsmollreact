@@ -45,6 +45,7 @@ const PersonAccount = ({ responseLogin }) => {
     } = useQuery(["users/account", userName], () => getPurchasedMovies(userName), {
         keepPreviousData: true
     });
+    console.log(purchasedMovies)
 
     const onHandlerDeleteMovie = (value) => {
         storeDataMovies.movie.splice(value, 1);
@@ -146,11 +147,11 @@ const PersonAccount = ({ responseLogin }) => {
                             List of selected movies {storeDataMovies.movie.length}
                         </p>
                         <ListSelectedMovies onHandlerDeleteMovie={onHandlerDeleteMovie}
-                            onHandlerBuyMovie={onHandlerBuyMovie} />
+                            onHandlerBuyMovie={onHandlerBuyMovie} userName={userName}/>
                     </div>
                     <div className='col-lg-6 d-flex row px-5' style={{ height: "fit-content" }}>
                         <p className='mt-2 fs-5 text-white'>
-                            List of purchased movies {purchasedMovies?.UserFilesResponse.length}
+                            List of purchased movies {purchasedMovies?.userFilesResponse.length}
                         </p>
                         <ListPurchasedMovies purchasedMovies={purchasedMovies} />
                     </div>

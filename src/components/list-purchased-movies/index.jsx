@@ -5,7 +5,7 @@ export const ListPurchasedMovies = ({purchasedMovies}) => {
 
     return (
         <Fragment>
-            {purchasedMovies?.UserFilesResponse.map((item, index) => {
+            {purchasedMovies?.userFilesResponse.map((item, index) => {
                 return <Card key={item.id * index + "b"}
                     style={{ backgroundColor: "#01D277" }}
                     className='d-flex flex-row w-100 p-0 mb-2 border'>

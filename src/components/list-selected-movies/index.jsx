@@ -21,7 +21,7 @@ const useStyleBtnBuyMovies = {
     }
 }
 
-export const ListSelectedMovies = ({ onHandlerDeleteMovie, onHandlerBuyMovie }) => {
+export const ListSelectedMovies = ({ onHandlerDeleteMovie, onHandlerBuyMovie, userName }) => {
 
     const storeDataMovies = store.getState();
     const { onHandlerCardsInfoMovies } = useContext(ContentData);
