@@ -1,4 +1,3 @@
-from django.db import transaction
 from django.contrib.auth import logout, authenticate, login
 from django.contrib.auth.models import User
 from rest_framework import viewsets, mixins
@@ -17,7 +16,6 @@ from rest_framework import generics
 from .models import People, Movies, LastLogin, AddMovies
 from .serializers import RegisterSerializer, LoginSerializer, PeopleSerializer, LastLoginSerializer, MovieSerializer, NotificationSerializer, UserFileSerializer
 
-# Create your views here.
 #Add user profile data
 @permission_classes([IsAuthenticated])
 @authentication_classes([BasicAuthentication])
@@ -135,7 +133,7 @@ class MoviesViewSet(generics.ListAPIView, mixins.CreateModelMixin,
         serialized_data['movies_select_url'] = 'https://www.themoviedb.org/t/p/w94_and_h141_bestv2'
         return Response(serialized_data)
 
-#from users/account/ 
+#from about/ 
 @api_view(['POST'])
 def notification(request):
     email = request.data.get('email') 
@@ -159,6 +157,7 @@ def notification(request):
             pass
         return Response({'notificationRespons': 'Request has been saved!'})   
 
+#from registration/
 @api_view(['POST'])
 def register(request):
     name = request.data.get('name')
@@ -177,7 +176,7 @@ def register(request):
             data['id'] = user.id
         return Response({'registrationRespons': data})
 
-
+#from login/
 @authentication_classes([BasicAuthentication])
 @api_view(['POST', 'DELETE'])
 def user(request: Request):
@@ -226,7 +225,7 @@ def user(request: Request):
             except User.DoesNotExist:
                 return Response({'message': 'User not found'}, status=404)
 
-
+#from logout/
 @api_view()
 def logout_view(request):
 	logout(request)
