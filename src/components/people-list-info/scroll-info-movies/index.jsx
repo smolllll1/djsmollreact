@@ -3,7 +3,7 @@ import ImageListItem from '@mui/material/ImageListItem';
 import ImageList from '@mui/material/ImageList';
 
 export default function ScrollInfoMovies({ listInfoPeople }) {
-    
+
     if (listInfoPeople) {
         return (
             <ImageList sx={{ width: "75%", height: 250 }} cols={1} rowHeight={211}>
@@ -11,9 +11,7 @@ export default function ScrollInfoMovies({ listInfoPeople }) {
                     return <ImageListItem
                         key={item.id * i + "l"}
                         className="my-4 w-75">
-                        < img
-                            src={`http://image.tmdb.org/t/p/w500${item?.backdrop_path}`}
-                            srcSet={`http://image.tmdb.org/t/p/w500${item?.backdrop_path}`}
+                        <img src={`https://image.tmdb.org/t/p/w500${item?.backdrop_path}`}
                             className="rounded"
                             style={{ width: "75%", height: "100%", objectFit: "cover" }}
                             alt={item.title}
