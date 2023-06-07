@@ -10,6 +10,7 @@ import store from "../../redux/store";
 import { axiosBaseUrl, getPurchasedMovies } from "../../api/axios";
 import CircularStatic from "../progress";
 import Alert from 'react-bootstrap/Alert';
+import AlertMui from '@mui/material/Alert';
 import { AuthenticationData } from "../data/authentication-data";
 
 import './person-account.css';
@@ -38,7 +39,6 @@ const PersonAccount = ({ responseLogin }) => {
     const storeDataMovies = store.getState();
     // message "This movie exists in the purchased list"
     const [messageMovieExists, setMessageMovieExists] = useState("");
-    console.log(messageMovieExists);
     const [messageMovieFlag, setMessageMovieFlag] = useState(false);
 
     const {
@@ -49,7 +49,6 @@ const PersonAccount = ({ responseLogin }) => {
     } = useQuery(["users/account", userName], () => getPurchasedMovies(userName), {
         keepPreviousData: true
     });
-    console.log(purchasedMovies)
 
     const onHandlerDeleteMovie = (value) => {
         storeDataMovies.movie.splice(value, 1);
@@ -69,7 +68,6 @@ const PersonAccount = ({ responseLogin }) => {
                 },
             })
             if (response.status === 200) {
-                console.log(response.data)
                 setMessageMovieExists(response.data)
             }
         } catch (error) {
@@ -156,12 +154,23 @@ const PersonAccount = ({ responseLogin }) => {
                             && storeDataMovies.movie.length !== 0
                             && messageMovieFlag === true
                             ?
-                            <Alert variant="warning">
+                            <AlertMui severity="warning" className='mb-2'>
                                 This movie exists in the purchased list
-                            </Alert>
+                            </AlertMui>
                             :
                             null
                         }
+                        {(messageMovieExists?.objectsResponse?.length > purchasedMovies?.userFilesResponse.length)
+                            && storeDataMovies.movie.length !== 0
+                            && messageMovieFlag === true
+                            ?
+                            <AlertMui severity="success" className='mb-2'>
+                                The purchase is successful
+                            </AlertMui>
+                            :
+                            null
+                        }
+
                         <ListSelectedMovies onHandlerDeleteMovie={onHandlerDeleteMovie}
                             onHandlerBuyMovie={onHandlerBuyMovie} userName={userName} />
                     </div>

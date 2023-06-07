@@ -1,4 +1,4 @@
-import React, { createContext, useContext } from 'react';
+import React, { createContext, useContext, useState } from 'react';
 import { axiosBaseUrl } from "../../api/axios";
 import { useFormik } from "formik";
 import * as Yup from "yup";
@@ -16,9 +16,7 @@ const ABOUT_URL = 'about/';
 const NotificationDataProvider = ({ children }) => {
 
     // Response Notification backend onSend
-    // const [responseNotification, setResponseNotification] = useState(null);
-    // Error Notification
-    // const [errMsgNotification, setErrMsgNotification] = useState('');
+    const [responseNotification, setResponseNotification] = useState(null);
 
     const { ourCodingAuth } = useContext(AuthenticationData);
 
@@ -45,7 +43,6 @@ const NotificationDataProvider = ({ children }) => {
 
         // Submit form notification
         onSubmit: async (values) => {
-            console.log(values)
             try {
                 const response = await axiosBaseUrl({
                     method: "post", url: ABOUT_URL,
@@ -59,21 +56,11 @@ const NotificationDataProvider = ({ children }) => {
                     },
                 })
                 if (response.status === 200) {
-                    console.log(response);
+                    setResponseNotification(response.data);
                 }
             } catch (error) {
                 console.log(error)
             }
-            // await axiosBaseUrl.post(ABOUT_URL, values)
-            //     .then(response => {
-            //         console.log(response.data);
-            //         setResponseNotification(response.data);
-            //     })
-            //     .catch(error => {
-            //         console.log(error.message);
-            //         setErrMsgNotification(error.message);
-            //     });
-
             cleanNotificationValue();
         }
     });
@@ -88,8 +75,7 @@ const NotificationDataProvider = ({ children }) => {
         <NotificationData.Provider
             value={{
                 formikNotification: formikNotification,
-                // responseNotification: responseNotification,
-                // errMsgNotification: errMsgNotification,
+                responseNotification: responseNotification,
                 cleanNotificationValue: cleanNotificationValue,
             }}
         >

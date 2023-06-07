@@ -91,7 +91,7 @@ const MoviesListInfo = ({ addNewMovie }) => {
                                 </div>
                             </div>
                             <div className="col-lg-7 d-flex vh-100 justify-content-center align-items-center">
-                                <div className="w-100 h-75 d-flex row"
+                                <div className="w-100 d-flex row"
                                     style={{ zIndex: "1000" }}>
                                     <div className="card-body text-white">
                                         <h2 className="card-title fw-bolder">
@@ -104,14 +104,14 @@ const MoviesListInfo = ({ addNewMovie }) => {
                                         <p className="card-text">
                                             {listInfoMovies.overview}
                                         </p>
-                                        <Button className="fs-5 mb-3 me-3"
+                                        <Button className="fs-5 mb-2 me-3"
                                             variant="contained"
                                             onClick={() => { navigate(-1) }}
                                             sx={useStyleBtnGoBack.button}>
                                             Go Back
                                         </Button>
                                         {responseLogin ?
-                                            <Button className="fs-5 mb-3"
+                                            <Button className="fs-5 mb-2"
                                                 variant="contained"
                                                 disabled={false}
                                                 onClick={() => { addNewMovie(listInfoMovies) }}

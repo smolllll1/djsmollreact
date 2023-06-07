@@ -14,6 +14,7 @@ const UsersRecent = () => {
     return (
         <Fragment>
             <h2>Recent</h2>
+            <section>
             <h6>{lastLogins.length} Logins</h6>
             <ul className='mb-2 list-unstyled'>
                 {lastLogins.map((item, i) => {
@@ -23,6 +24,7 @@ const UsersRecent = () => {
                 })
                 }
             </ul>
+            </section>
         </Fragment >
     );
 }

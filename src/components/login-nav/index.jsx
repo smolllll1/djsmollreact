@@ -9,12 +9,14 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import AccountMenu from "./avatar/index";
 import SearchIcon from '@mui/icons-material/Search';
 import { AuthenticationData } from "../data/authentication-data";
+import { NotificationData } from "../data/notification-data";
 import { connect } from "react-redux";
 
 import './login-nav.css';
 
 const LoginNav = (data) => {
 
+    const { responseNotification } = useContext(NotificationData);
     const {
         onHandlerLogout,
         responseLogout,
@@ -31,6 +33,9 @@ const LoginNav = (data) => {
             },
         }
     }
+
+    let count = 0;
+    if (responseNotification !== null) { count++ }
 
     return (
         <Stack direction="row" spacing={0}>
@@ -59,7 +64,7 @@ const LoginNav = (data) => {
                     <IconButton
                         size="large"
                         aria-label="show 0 new notifications">
-                        <Badge badgeContent={0} color="error">
+                        <Badge badgeContent={count} color="error">
                             <NotificationsIcon className="bell" />
                         </Badge>
                     </IconButton>
