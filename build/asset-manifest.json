@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/static/css/main.27394203.css",
+    "main.js": "/static/js/main.8fa41911.js",
+    "static/media/red-pipes.svg": "/static/media/red-pipes.dd85e342e3af53b5f427.svg",
+    "static/media/green-pipes.svg": "/static/media/green-pipes.8aa1a136e0bd89504270.svg",
+    "static/media/logo-footer.svg": "/static/media/logo-footer.de1a664e8d0777ca4ddb2a5a298bcfb6.svg",
+    "static/media/logo.svg": "/static/media/logo.bb8aa703cb92c9aa31fc1e0b17850ed9.svg",
+    "index.html": "/index.html",
+    "main.27394203.css.map": "/static/css/main.27394203.css.map",
+    "main.8fa41911.js.map": "/static/js/main.8fa41911.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.27394203.css",
+    "static/js/main.8fa41911.js"
+  ]
+}

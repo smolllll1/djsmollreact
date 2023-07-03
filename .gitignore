@@ -14,7 +14,7 @@
 /backend_django_rest/__pycache__
 
 # production
-/build
+#/build
 
 # misc
 .DS_Store
